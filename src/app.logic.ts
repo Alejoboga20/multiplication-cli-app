@@ -4,9 +4,7 @@ import { yarg } from './config';
 let outputMessage = '';
 const outputDir = 'outputs';
 
-const base = yarg.b;
-const limit = yarg.l;
-const show = yarg.s;
+const { b: base, l: limit, s: show } = yarg;
 
 const headerMessage = `
 ==============================
