@@ -1,1 +1,3 @@
-console.log(process.argv);
+import { yarg } from './config';
+
+console.log({ yarg });
