@@ -5,5 +5,5 @@ import { yarg } from './config';
 })();
 
 async function main() {
-	console.log('main');
+	console.log({ yarg });
 }
