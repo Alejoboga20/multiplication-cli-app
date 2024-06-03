@@ -20,4 +20,11 @@ export const yarg = yargs(hideBin(process.argv))
 		default: false,
 		describe: 'Show multiplication table',
 	})
+	.check((argv, options) => {
+		if (argv.b < 1 || argv.b > 20) {
+			throw new Error('Base must be between 1 and 20');
+		}
+
+		return true;
+	})
 	.parseSync();
