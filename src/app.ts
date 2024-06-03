@@ -1,3 +1,9 @@
 import { yarg } from './config';
 
-console.log({ yarg });
+(async () => {
+	await main();
+})();
+
+async function main() {
+	console.log('main');
+}
