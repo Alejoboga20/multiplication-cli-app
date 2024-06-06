@@ -2,31 +2,31 @@ import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 
 export const yarg = yargs(hideBin(process.argv))
-	.options('b', {
+	.option('b', {
 		alias: 'base',
 		type: 'number',
 		demandOption: true,
 		describe: 'Multiplication table base',
 	})
-	.options('l', {
+	.option('l', {
 		alias: 'limit',
 		type: 'number',
 		default: 10,
 		describe: 'Multiplication table limit',
 	})
-	.options('s', {
+	.option('s', {
 		alias: 'show',
 		type: 'boolean',
 		default: false,
 		describe: 'Show multiplication table',
 	})
-	.options('n', {
+	.option('n', {
 		alias: 'name',
 		type: 'string',
 		default: 'multiplication-table',
 		describe: 'File name',
 	})
-	.options('d', {
+	.option('d', {
 		alias: 'destination',
 		type: 'string',
 		default: 'outputs',
