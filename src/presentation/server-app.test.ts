@@ -11,6 +11,10 @@ const runOptions = {
 };
 
 describe('Server App Tests', () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
+
 	test('should create serverApp instance', () => {
 		const serverApp = new ServerApp();
 
@@ -34,6 +38,34 @@ describe('Server App Tests', () => {
 		expect(saveFileSpy).toHaveBeenCalledTimes(1);
 		expect(saveFileSpy).toHaveBeenCalledWith({
 			fileContent: expect.any(String),
+			fileName: runOptions.name,
+			fileDestination: runOptions.destination,
+		});
+	});
+
+	test('should run serverApp with custom mocked alues', async () => {
+		const logMock = jest.fn();
+		const createTableMock = jest.fn().mockReturnValue('mocked-table');
+		const saveFileMock = jest.fn().mockReturnValue(true);
+
+		console.log = logMock;
+		CreateTable.prototype.execute = createTableMock;
+		SaveFile.prototype.execute = saveFileMock;
+
+		ServerApp.run(runOptions);
+
+		expect(logMock).toHaveBeenCalledWith('Server is running...');
+		expect(logMock).toHaveBeenCalledWith('File created: Yes');
+
+		expect(createTableMock).toHaveBeenCalledTimes(1);
+		expect(createTableMock).toHaveBeenCalledWith({
+			base: runOptions.base,
+			limit: runOptions.limit,
+		});
+
+		expect(saveFileMock).toHaveBeenCalledTimes(1);
+		expect(saveFileMock).toHaveBeenCalledWith({
+			fileContent: 'mocked-table',
 			fileName: runOptions.name,
 			fileDestination: runOptions.destination,
 		});
